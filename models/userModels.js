@@ -22,16 +22,17 @@ const userSchema = new Schema({
   commune: {
     type: String,
   },
+  address: {
+    type: String,
+  },
   password: {
     type: String,
     required: true,
   },
-  address: {
+  role: {
     type: String,
-  },
-  isAdmin: {
-    type: Boolean,
-    default: false,
+    enum: ["USER", "ADMIN"],
+    default: "USER",
   },
   cart: {
     type: Array,
@@ -39,6 +40,10 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
+  },
+  active: {
+    type: Boolean,
+    default: true,
   },
 });
 
