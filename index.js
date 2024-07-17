@@ -6,6 +6,7 @@ import NotFound from "./middleware/notFound.js";
 import errorHandler from "./middleware/errorHandler.js";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 import cookieParser from "cookie-parser";
 import fs from "fs";
 import https from "https";
@@ -24,10 +25,12 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/uploads", express.static("./uploads"));
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/product", productRoutes);
+app.use("/api/v1/file", uploadRoutes);
 
 app.use("*", NotFound);
 app.use(errorHandler);
