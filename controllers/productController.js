@@ -13,6 +13,14 @@ const getDetailProduct = asyncHandler(async (req, res) => {
   });
 });
 
+const getProductsByCategory = asyncHandler(async (req, res) => {
+  const products = await Product.find({ id_category: req.params.id });
+  return res.status(200).json({
+    data: products,
+    vcode: 0,
+  });
+});
+
 // Admin controllers 👇
 const getProducts = asyncHandler(async (req, res) => {
   const { current, pageSize } = req.query;
@@ -32,21 +40,26 @@ const getProducts = asyncHandler(async (req, res) => {
     .skip((currentNum - 1) * pageSizeNum);
 
   return res.status(200).json({
-    data: products,
+    data: {
+      meta: {
+        current: currentNum,
+        pageSize: pageSizeNum,
+        total: await Product.countDocuments(),
+      },
+      result: products,
+    },
     vcode: 0,
   });
 });
 
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, image, price, discountedPrice, status, desc, detailDesc } = req.body;
+  const { name, price, costPrice, status, active, desc, units } = req.body;
 
   switch (true) {
     case !name:
       throw new CustomError("Vui lòng nhập tên sản phẩm", 400);
-    case !image:
-      throw new CustomError("Vui lòng chọn ảnh đại diện", 400);
-    case !price:
-      throw new CustomError("Vui lòng nhập giá sản phẩm", 400);
+    case units.length == 0:
+      throw new CustomError("Vui lòng nhập thuộc tính", 400);
   }
 
   const product = new Product(req.body);
@@ -111,4 +124,5 @@ export default {
   createProduct,
   deleteProduct,
   updateProduct,
+  getProductsByCategory,
 };

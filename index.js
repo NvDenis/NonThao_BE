@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import cookieParser from "cookie-parser";
+import categoryRoutes from "./routes/categoryRoutes.js";
 import fs from "fs";
 import https from "https";
 import cors from "cors";
@@ -30,6 +31,7 @@ app.use("/uploads", express.static("./uploads"));
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/product", productRoutes);
+app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/file", uploadRoutes);
 
 app.use("*", NotFound);

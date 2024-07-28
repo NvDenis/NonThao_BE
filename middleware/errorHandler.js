@@ -5,8 +5,7 @@ const errorHandler = (err, req, res, next) => {
     return res.status(err.statusCode).json({ message: err.message, vcode: 1 });
   }
   return res.status(500).json({
-    message: "Internal Server Error",
-    error: err.message,
+    message: err.message,
     vscode: 1,
   });
 };

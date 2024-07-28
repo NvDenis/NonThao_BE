@@ -8,7 +8,6 @@ const router = express.Router();
 // Cấu hình nơi lưu trữ và tên file
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log("file", file);
     const contentType = req.headers["upload-type"];
     let path = "uploads/";
 
@@ -16,6 +15,8 @@ const storage = multer.diskStorage({
       path += "images/hat";
     } else if (contentType === "avatar") {
       path += "images/avatar";
+    } else if (contentType === "category") {
+      path += "images/category";
     }
     cb(null, path); // Nơi lưu trữ file
   },
