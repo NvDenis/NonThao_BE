@@ -118,7 +118,7 @@ const logout = asyncHandler(async (req, res) => {
 });
 
 const account = asyncHandler(async (req, res) => {
-  const foundUser = await User.findOne({ phone: req.user.phone });
+  const foundUser = await User.findById(req.user._id);
   if (!foundUser) {
     throw new CustomError("Không tìm thấy người dùng", 404);
   }

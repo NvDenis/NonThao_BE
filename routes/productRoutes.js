@@ -11,4 +11,6 @@ router.route("/data/").get(productController.getProducts).post(productController
 
 router.route("/category/:id").get(productController.getProductsByCategory);
 
+router.route("/link/:link").get(productController.getProductByLink);
+
 export default router;

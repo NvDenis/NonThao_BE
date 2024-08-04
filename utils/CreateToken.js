@@ -4,6 +4,7 @@ export const CreateAccessToken = (user) => {
   return jwt.sign(
     {
       userInfo: {
+        _id: user._id,
         phone: user.phone,
         name: user.name,
         role: user.role,

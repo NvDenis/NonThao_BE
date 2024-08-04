@@ -21,6 +21,18 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
   });
 });
 
+const getProductByLink = asyncHandler(async (req, res) => {
+  const product = await Product.findOne({ link: req.params.link }).populate("id_category");
+  if (!product) {
+    throw new CustomError("Sản phẩm không tồn tại", 404);
+  }
+
+  return res.status(200).json({
+    data: product,
+    vcode: 0,
+  });
+});
+
 // Admin controllers 👇
 const getProducts = asyncHandler(async (req, res) => {
   const { current, pageSize } = req.query;
@@ -96,10 +108,12 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   const fieldsToUpdate = [
     "name",
-    "image",
-    "price",
+    "costPrice",
     "discountedPrice",
     "inStock",
+    "status",
+    "active",
+    "id_category",
     "desc",
     "introduction",
   ];
@@ -125,4 +139,5 @@ export default {
   deleteProduct,
   updateProduct,
   getProductsByCategory,
+  getProductByLink,
 };
