@@ -29,7 +29,8 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/uploads", express.static("./uploads"));
+// app.use("/uploads", express.static("./uploads"));
+app.use(express.static("./uploads"));
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/auth", authRoutes);
