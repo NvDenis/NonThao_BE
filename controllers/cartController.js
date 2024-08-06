@@ -18,7 +18,7 @@ const addToCart = asyncHandler(async (req, res) => {
     throw new CustomError("Sản phẩm không tồn tại", 404);
   }
 
-  const itemIndex = user.cart.findIndex((item) => item.product.toString() === product);
+  const itemIndex = user.cart.findIndex((item) => item.product.toString() == product);
   if (itemIndex > -1) {
     user.cart[itemIndex].quantity += quantity;
   } else {
@@ -28,6 +28,7 @@ const addToCart = asyncHandler(async (req, res) => {
   await user.save();
   res.status(200).json({
     vcode: 0,
+    data: user.cart,
     message: "Thêm sản phẩm vào giỏ hàng thành công",
   });
 });
@@ -47,6 +48,7 @@ const removeFromCart = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     vcode: 0,
+    data: user.cart,
     message: "Xóa sản phẩm khỏi giỏ hàng thành công",
   });
 });
@@ -72,6 +74,7 @@ const updateCartItem = asyncHandler(async (req, res) => {
   await user.save();
   res.status(200).json({
     vcode: 0,
+    data: user.cart,
     message: "Cập nhật giỏ hàng thành công",
   });
 });
