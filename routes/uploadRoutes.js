@@ -31,7 +31,6 @@ router.post(
   "/uploads",
   upload.single("fileImg"),
   asyncHandler((req, res) => {
-    console.log("file", req.file);
     if (!req.file) {
       throw new CustomError("Vui lòng chọn file", 400);
     }

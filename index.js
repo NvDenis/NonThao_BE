@@ -19,7 +19,13 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://127.0.0.1:5173", "https://non-thao-fe.vercel.app"],
+    // origin: [
+    //   "http://localhost:5173",
+    //   "http://127.0.0.1:5173",
+    //   "https://non-thao-fe.vercel.app",
+    //   "http://192.168.1.8:5173",
+    // ],
+    origin: true,
     credentials: true,
   })
 );
@@ -41,17 +47,6 @@ app.use(errorHandler);
 const start = async () => {
   try {
     await connectDB();
-    // https
-    //   .createServer(
-    //     {
-    //       key: fs.readFileSync("./localhost+1-key.pem"),
-    //       cert: fs.readFileSync("./localhost+1.pem"),
-    //     },
-    //     app
-    //   )
-    //   .listen(PORT, () => {
-    //     console.log(`Server running on port: ${PORT}`);
-    //   });
     app.listen(PORT, () => {
       console.log(`Server running on port: ${PORT}`);
     });
