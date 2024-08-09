@@ -23,7 +23,7 @@ app.use(
     //   "http://localhost:5173",
     //   "http://127.0.0.1:5173",
     //   "https://non-thao-fe.vercel.app",
-    //   "http://192.168.1.8:5173",
+    //   "http://192.168.1.7:5173",
     // ],
     origin: true,
     credentials: true,
@@ -47,7 +47,7 @@ app.use(errorHandler);
 const start = async () => {
   try {
     await connectDB();
-    app.listen(PORT, () => {
+    app.listen(PORT, "0.0.0.0", () => {
       console.log(`Server running on port: ${PORT}`);
     });
   } catch (error) {
